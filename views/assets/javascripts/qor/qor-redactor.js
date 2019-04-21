@@ -325,9 +325,10 @@
           fileUpload: $this.data("uploadUrl"),
           buttons: editorButtons,
           linkNewTab: true,
-          linkTitle: true,
+          linkTitle: false,
           autoparsePaste: false,
           autoparseLinks: false,
+          multipleUpload: false,
           toolbarFixedTarget:
             !$this.closest(".qor-slideout").length &&
             !$this.closest(".qor-bottomsheets").length
@@ -358,7 +359,9 @@
                 toolbarFixedTarget = ".qor-layout main.qor-page";
                 toolbarFixedTopOffset =
                   toolbarFixedTopOffset +
-                  $(toolbarFixedTarget).find(".qor-page__header").height();
+                  $(toolbarFixedTarget)
+                    .find(".qor-page__header")
+                    .height();
               }
 
               $(toolbarFixedTarget).on(EVENT_SCROLL, function() {
@@ -408,7 +411,9 @@
             },
 
             fileUpload: function(link, json) {
-              $(link).prop("href", json.filelink).html(json.filename);
+              $(link)
+                .prop("href", json.filelink)
+                .html(json.filename);
             }
           }
         };
